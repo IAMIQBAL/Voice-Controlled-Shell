@@ -1,4 +1,15 @@
 import zmq
+import speech_recognition as sr
+
+# print("Speak Now")
+
+# r = sr.Recognizer()
+# audio = sr.AudioFile('hello.wav')
+# with audio as source:
+#     audio = r.record(source)
+
+# req = r.recognize_google(audio)
+# print(req)
 
 context = zmq.Context()
 

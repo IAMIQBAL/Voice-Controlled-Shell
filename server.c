@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 #include <zmq.h>
 #include <assert.h>
+#include "backend.h"
 
 int main(void){
 
@@ -16,10 +17,10 @@ int main(void){
     while (1){
         
         // Receive Length of command
-        char lenBuffer[1];
+        int lenBuffer[1];
         zmq_recv(responder, lenBuffer, 1, 0);
-        printf("Length: %d\n", atoi(lenBuffer));
-        int len = atoi(lenBuffer);
+        printf("Length: %d\n", lenBuffer[0]);
+        int len = lenBuffer[0];
         memset(lenBuffer, 0, 1);
         sleep(1);
         zmq_send(responder, "Length Received", 15, 0);
@@ -34,12 +35,13 @@ int main(void){
         int commandStatus;
 
         if (!fork()){
-            commandStatus = execlp(commandBuffer, commandBuffer, /*"-l", "-a",*/ "/home/", (char *)NULL);
+            // commandStatus = execlp(commandBuffer, commandBuffer, /*"-l", "-a",*/ "/home/", (char *)NULL);
+            commandStatus = execute(commandBuffer);
             exit(0);
         }
         wait(NULL);
         memset(commandBuffer, 0, len);
-        printf("Command Status: %d", commandStatus);
+        printf("Command Status: %d\n", commandStatus);
 
     }
     return 0;
