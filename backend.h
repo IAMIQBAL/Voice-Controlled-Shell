@@ -14,14 +14,16 @@ int execute(char* command){
         status = execlp("df", "df", "-h", (char *)NULL);
     } else if (strstr(command, "open firefox")){
         status = execlp("firefox", "firefox", (char *)NULL);
-    } else if (strstr(command, "")){
-
-    } else if (strstr(command, "list")){
-
-    } else if (strstr(command, "list")){
-
-    } else if (strstr(command, "list")){
-
+    } else if (strstr(command, "network information")){
+        status = execlp("ifconfig", "ifconfig", (char *)NULL);
+    } else if (strstr(command, "change directory")){
+        status = execlp("cd", "cd", "../", (char *)NULL);
+    } else if (strstr(command, "make file named")){
+        char *word = strrchr(command, ' ') + 1;
+        status = execlp("touch", "touch", word, (char *)NULL);
+    } else if (strstr(command, "find")){
+        char *word = strrchr(command, ' ') + 1;
+        status = execlp("find", "find", "/home/", "-type", "f", "-iname", word, (char *)NULL);
     } else if (strstr(command, "list")){
 
     } else if (strstr(command, "list")){
