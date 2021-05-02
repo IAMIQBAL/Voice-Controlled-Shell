@@ -24,10 +24,35 @@ int execute(char* command){
     } else if (strstr(command, "find")){
         char *word = strrchr(command, ' ') + 1;
         status = execlp("find", "find", "/home/", "-type", "f", "-iname", word, (char *)NULL);
-    } else if (strstr(command, "list")){
+    } else if (strstr(command, "restart")){
+        status = execlp("shutdown", "shutdown", "-r", "now", (char *)NULL);
+    } else if (strstr(command, "shutdown")){
+        status = execlp("shutdown", "shutdown", "now", (char *)NULL);
+    } else if (strstr(command, "remove file named")){
+        char *word = strrchr(command, ' ') + 1;
+        status = execlp("rm", "rm", "-rf", word, (char *)NULL);
+    } else if (strstr(command, "go to")){
+        char *word = strrchr(command, ' ') + 1;
+        status = execlp("firefox", "firefox", "-new-tab", word, (char *)NULL);
+    } else if (strstr(command, "search")){
+        char *word = strrchr(command, ' ') + 1;
+        char *site = "http://www.google.com/search?q=";
+        char *result = malloc(strlen(word) + strlen(site) + 1);
+        strcpy(result, site);
+        strcat(result, word);
+        status = execlp("firefox", "firefox", "-new-tab", result, (char *)NULL);
+    } else if (strstr(command, "")){
 
-    } else if (strstr(command, "list")){
-
+    } else if (strstr(command, "")){
+    
+    } else if (strstr(command, "")){
+    
+    } else if (strstr(command, "")){
+    
+    } else if (strstr(command, "")){
+    
+    } else if (strstr(command, "")){
+    
     }
 
 
