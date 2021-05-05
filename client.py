@@ -1,6 +1,24 @@
 import zmq
 import speech_recognition as sr
+import os
+from gtts import gTTS
+from pydub import AudioSegment
+from pydub.playback import play
 
+def speak(string):
+    language = 'en-US'
+    tts = gTTS(text=string, lang=language)
+    tts.save("Sounds/output.mp3")
+
+    sound = AudioSegment.from_mp3("Sounds/output.mp3")
+    sound.export("Sounds/output.wav", format="wav")
+    os.system("mpg123 Sounds/output.mp3")
+
+speak("Hello there. How may I help you.")
+os.system("mpg123 Sounds/speak.mp3")
+
+# speech = AudioSegment.from_wav("output.wav")
+# play(speech)
 # print("Speak Now")
 
 # r = sr.Recognizer()
@@ -35,3 +53,4 @@ while(1):
     message2 = socket.recv()
     print(f"Received reply {request} [ {message2} ]")
     request+=1
+    os.system("mpg123 Sounds/executing.mp3")

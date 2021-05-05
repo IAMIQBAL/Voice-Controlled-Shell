@@ -35,7 +35,6 @@ int main(void){
         int commandStatus;
 
         if (!fork()){
-            // commandStatus = execlp(commandBuffer, commandBuffer, /*"-l", "-a",*/ "/home/", (char *)NULL);
             commandStatus = execute(commandBuffer);
             exit(0);
         }
