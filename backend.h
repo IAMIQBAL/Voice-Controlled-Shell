@@ -41,8 +41,9 @@ int execute(char* command){
         strcpy(result, site);
         strcat(result, word);
         status = execlp("firefox", "firefox", "-new-tab", result, (char *)NULL);
-    } else if (strstr(command, "close")){
-        system("exit");
+    } else if (strstr(command, "get username")){
+        char *word = strrchr(command, ' ') + 1;
+        status = execlp("Scripts/getuname.sh", "Scripts/getuname.sh", word, (char *)NULL);
     } else if (strstr(command, "")){
     
     } else if (strstr(command, "")){
