@@ -44,12 +44,12 @@ int execute(char* command){
     } else if (strstr(command, "get username")){
         char *word = strrchr(command, ' ') + 1;
         status = execlp("Scripts/getuname.sh", "Scripts/getuname.sh", word, (char *)NULL);
-    } else if (strstr(command, "")){
-    
-    } else if (strstr(command, "")){
-    
-    } else if (strstr(command, "")){
-    
+    } else if (strstr(command, "uptime")){
+        status = execlp("uptime", "uptime", "-p", (char *)NULL);
+    } else if (strstr(command, "users currently logged in")){
+        status = execlp("who", "who", (char *)NULL);
+    } else if (strstr(command, "current user")){
+        status = execlp("whoami", "whoami", (char *)NULL);
     } else if (strstr(command, "")){
     
     } else if (strstr(command, "")){
