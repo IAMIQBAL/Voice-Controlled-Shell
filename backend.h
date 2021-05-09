@@ -50,12 +50,12 @@ int execute(char* command){
         status = execlp("who", "who", (char *)NULL);
     } else if (strstr(command, "current user")){
         status = execlp("whoami", "whoami", (char *)NULL);
-    } else if (strstr(command, "")){
-    
-    } else if (strstr(command, "")){
-    
+    } else if (strstr(command, "print the date")){
+        status = execlp("date", "+%c", (char *)NULL);
+    } else if (strstr(command, "gedit")){
+        char *word = strrchr(command, ' ') + 1;
+        status = execlp("gedit", word, (char *)NULL);
     }
-
 
     return status;
 }
