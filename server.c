@@ -36,16 +36,15 @@ int main(void){
 
         if (!fork()){
             commandStatus = execute(commandBuffer);
+            if (commandStatus == -1){
+                printf("Command not found\n");
+            }
             exit(0);
         }
+
         wait(NULL);
         memset(commandBuffer, 0, len);
-        printf("Command Status: %d\n", commandStatus);
 
     }
     return 0;
-}
-
-char* getCommand(){
-    
 }
