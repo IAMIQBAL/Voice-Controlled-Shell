@@ -48,22 +48,41 @@ print("Connecting to VCS Server...")
 socket = context.socket(zmq.REQ)
 socket.connect("tcp://localhost:5555")
 
+r = sr.Recognizer()
+m = sr.Microphone()
+
 while(1):
-    request = 0
-    print(f"Sending request {request} ...")
-    req = input("Enter a command: ")
-    length = len(req)
+    res = recognizeSpeech(m, r)
 
-    # Send Length of command
-    socket.send(str(length).encode('ascii'))
-
-    message = socket.recv()
-    print(f"Received reply {request} [ {message} ]")
-
-    # Send the command
-    socket.send(req.encode('ascii'))
+    if res["error"]:
+        print("Error: {}".format(res["error"]))
+        continue;
     
-    message2 = socket.recv()
-    print(f"Received reply {request} [ {message2} ]")
-    request+=1
-    os.system("mpg123 Sounds/executing.mp3")
+    txt = str(format(res["transcription"])).lower()
+    print("You said: " + txt)
+
+    while(1):
+        # request = 0
+        print(f"Sending request {request} ...")
+        # req = input("Enter a command: ")
+        length = len(res)
+
+        # Send Length of command
+        socket.send(str(length).encode('ascii'))
+
+        message = socket.recv()
+        print(f"Received reply {request} [ {message} ]")
+
+        # Send the command
+        socket.send(res.encode('ascii'))
+        
+        message2 = socket.recv()
+        print(f"Received reply {request} [ {message2} ]")
+        request+=1
+        os.system("mpg123 Sounds/executing.mp3")
+        break
+
+    if 'exit' in txt:
+        speak("Have a nice day")
+        speak("Good bye")
+        break
