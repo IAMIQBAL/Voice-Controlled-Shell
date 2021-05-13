@@ -18,6 +18,12 @@ int execute(char* command){
         status = execlp("ifconfig", "ifconfig", (char *)NULL);
     } else if (strstr(command, "change directory")){
         status = execlp("cd", "cd", "../", (char *)NULL);
+    } else if (strstr(command, "make directory named")){
+        char *word = strrchr(command, ' ') + 1;
+        status = execlp("mkdir", "mkdir", word, (char *)NULL);
+    } else if (strstr(command, "remove directory named")){
+        char *word = strrchr(command, ' ') + 1;
+        status = execlp("rmdir", "rmdir", word, (char *)NULL);
     } else if (strstr(command, "make file named")){
         char *word = strrchr(command, ' ') + 1;
         status = execlp("touch", "touch", word, (char *)NULL);
@@ -55,6 +61,16 @@ int execute(char* command){
     } else if (strstr(command, "gedit")){
         char *word = strrchr(command, ' ') + 1;
         status = execlp("gedit", word, (char *)NULL);
+    } else if (strstr(command, "quote of the day")){
+        status = execlp("Scripts/Quote_of_the_Day.sh", "Scripts/Quote_of_the_Day.sh", (char *)NULL);
+    } else if (strstr(command, "calendar")){
+        status = execlp("cal", "cal", (char *)NULL);
+    } else if (strstr(command, "current processes")){
+        status = execlp("ps", "ps", (char *)NULL);
+    } else if (strstr(command, "all running processes")){
+        status = execlp("ps", "ps", "-e", (char *)NULL);
+    } else {
+        status = -1;
     }
 
     return status;
