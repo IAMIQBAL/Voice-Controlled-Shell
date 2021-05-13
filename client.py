@@ -14,20 +14,33 @@ def speak(string):
     sound.export("Sounds/output.wav", format="wav")
     os.system("mpg123 Sounds/output.mp3")
 
+def recognizeSpeech(mic, recognizer):
+    if not isinstance(recognizer, sr.Recognizer):
+        raise TypeError("recognizer must be 'Recognizer' instance")
+    if not isinstance(mic, sr.Microphone):
+        raise TypeError("microphone must be 'Microphone' instance")
+
+    with mic as source:
+        recognizer.adjust_for_ambient_noise(source)
+        audio = recognizer.listen(source)
+
+    response = {
+        "success": True,
+        "error": None,
+        "transcription": None
+    }
+
+    try:
+        response["transcription"] = recognizer.recognize_google(audio)
+    except sr.RequestError:
+        response["success"] = False
+        response["error"] = "API unavailable"
+    except sr.UnknownValueError:
+        response["error"] = "Unable to recognize speech"
+    return response
+
 speak("Hello there. How may I help you.")
 os.system("mpg123 Sounds/speak.mp3")
-
-# speech = AudioSegment.from_wav("output.wav")
-# play(speech)
-# print("Speak Now")
-
-# r = sr.Recognizer()
-# audio = sr.AudioFile('hello.wav')
-# with audio as source:
-#     audio = r.record(source)
-
-# req = r.recognize_google(audio)
-# print(req)
 
 context = zmq.Context()
 
