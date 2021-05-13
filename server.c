@@ -34,6 +34,10 @@ int main(void){
         char path[9] = "/usr/bin/";
         int commandStatus;
 
+        if (strstr(commandBuffer, "exit")){
+            break;
+        }
+
         if (!fork()){
             commandStatus = execute(commandBuffer);
             if (commandStatus == -1){

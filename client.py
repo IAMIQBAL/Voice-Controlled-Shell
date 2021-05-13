@@ -62,7 +62,7 @@ while(1):
     print("You said: " + txt)
 
     while(1):
-        # request = 0
+        request = 0
         print(f"Sending request {request} ...")
         # req = input("Enter a command: ")
         length = len(res)
@@ -74,7 +74,7 @@ while(1):
         print(f"Received reply {request} [ {message} ]")
 
         # Send the command
-        socket.send(res.encode('ascii'))
+        socket.send(txt.encode('ascii'))
         
         message2 = socket.recv()
         print(f"Received reply {request} [ {message2} ]")
