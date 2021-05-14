@@ -13,9 +13,11 @@ int main(void){
     void *responder = zmq_socket(context, ZMQ_REP);
     int rc = zmq_bind(responder, "tcp://*:5555");
     assert(rc == 0);
+
+    printf("Connected to VCS Server...\n");
     
     while (1){
-        
+                
         // Receive Length of command
         int lenBuffer[1];
         zmq_recv(responder, lenBuffer, 1, 0);

@@ -52,6 +52,7 @@ r = sr.Recognizer()
 m = sr.Microphone()
 
 while(1):
+    print("Speak NOW...")
     res = recognizeSpeech(m, r)
 
     if res["error"]:

@@ -8,6 +8,8 @@ int execute(char* command){
         status = execlp("ls", "ls", ".", (char *)NULL);
     } else if (strstr(command, "list files of root directory")){
         status = execlp("ls", "ls", "/", (char *)NULL);
+    } else if (strstr(command, "list hidden files")){
+        status = execlp("ls", "ls", "-l", "-a", "/", (char *)NULL);
     } else if (strstr(command, "list files of home directory")){
         status = execlp("ls", "ls", "/home/", (char *)NULL);
     } else if (strstr(command, "disk usage")){
