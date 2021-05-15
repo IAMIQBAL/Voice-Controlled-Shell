@@ -71,6 +71,12 @@ int execute(char* command){
         status = execlp("ps", "ps", (char *)NULL);
     } else if (strstr(command, "all running processes")){
         status = execlp("ps", "ps", "-e", (char *)NULL);
+    } else if (strstr(command, "print data of")){
+        char *word = strrchr(command, ' ') + 1;
+        status = execlp("cat", word, (char *)NULL);
+    } else if (strstr(command, "system summary information")){
+        char *word = strrchr(command, ' ') + 1;
+        status = execlp("Scripts/top.sh", "Scripts/top.sh", (char *)NULL);
     } else {
         status = -1;
     }
