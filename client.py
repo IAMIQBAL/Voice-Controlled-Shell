@@ -84,6 +84,7 @@ while(1):
         break
 
     if 'exit' in txt:
+        socket.send(txt.encode('ascii'))
         speak("Have a nice day")
         speak("Good bye")
         break
