@@ -20,13 +20,13 @@ int execute(char* command){
         status = execlp("ifconfig", "ifconfig", (char *)NULL);
     } else if (strstr(command, "change directory")){
         status = execlp("cd", "cd", "../", (char *)NULL);
-    } else if (strstr(command, "make directory named")){
+    } else if (strstr(command, "make directory")){
         char *word = strrchr(command, ' ') + 1;
         status = execlp("mkdir", "mkdir", word, (char *)NULL);
-    } else if (strstr(command, "remove directory named")){
+    } else if (strstr(command, "remove directory")){
         char *word = strrchr(command, ' ') + 1;
         status = execlp("rmdir", "rmdir", word, (char *)NULL);
-    } else if (strstr(command, "make file named")){
+    } else if (strstr(command, "make file")){
         char *word = strrchr(command, ' ') + 1;
         status = execlp("touch", "touch", word, (char *)NULL);
     } else if (strstr(command, "find")){
@@ -36,7 +36,7 @@ int execute(char* command){
         status = execlp("shutdown", "shutdown", "-r", "now", (char *)NULL);
     } else if (strstr(command, "shutdown")){
         status = execlp("shutdown", "shutdown", "now", (char *)NULL);
-    } else if (strstr(command, "remove file named")){
+    } else if (strstr(command, "remove file")){
         char *word = strrchr(command, ' ') + 1;
         status = execlp("rm", "rm", "-rf", word, (char *)NULL);
     } else if (strstr(command, "go to")){
