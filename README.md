@@ -25,6 +25,7 @@ gcc -o main server.c -lzmq
 ```
 python3 client.py
 ```
+<<<<<<< HEAD
 
 ## Commands
 
@@ -58,3 +59,5 @@ python3 client.py
 | list files of root directory | list directory contents of root | `ls /` |
 | list files of home directory | list directory contents of home | `ls /home/` |
 | change directory | changes directory one level upwards | `cd ../` |
+=======
+>>>>>>> f26c231ea63364bb508a70a21e4926420b354099
